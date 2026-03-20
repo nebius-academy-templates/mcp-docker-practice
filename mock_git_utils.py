@@ -24,8 +24,9 @@ class MockCommit:
 
 
 class MockGitRepository:
-    def __init__(self, commits: list[MockCommit]):
-        self._commits = commits
+    def __init__(self, path: str):
+        self.path = path
+        self._commits = SAMPLE_COMMITS
 
     def get_commits(self, days: int) -> list[MockCommit]:
         return self._commits
@@ -36,7 +37,7 @@ class MockGitRepository:
 
 SAMPLE_COMMITS = [
     MockCommit(MockAuthor("alice@example.com"), ["src/auth.py", "src/models.py"]),
-    MockCommit(MockAuthor("bob@example.com"), ["src/auth.py", "tests/test_auth.py"]),
+    MockCommit(MockAuthor("bob@example.com"), ["src/auth.py", "mcp_tests/test_auth.py"]),
     MockCommit(MockAuthor("alice@example.com"), ["src/auth.py"]),
     MockCommit(MockAuthor("carol@example.com"), ["src/models.py", "src/api.py"]),
 ]
@@ -67,6 +68,6 @@ MOCK_CODEOWNERS = {
         {"pattern": "src/auth/*", "owners": ["@alice", "@security-team"]},
         {"pattern": "src/api/*", "owners": ["@backend-team"]},
         {"pattern": "src/models/*", "owners": ["@alice", "@bob"]},
-        {"pattern": "tests/*", "owners": ["@qa-team"]},
+        {"pattern": "mcp_tests/*", "owners": ["@qa-team"]},
     ]
 }
