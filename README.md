@@ -45,7 +45,7 @@ docker build -t git-activity-analyzer .
 1. Run the container in SSE mode and expose port 8000 (use the README command).
 2. Mount any local Git repo into the container at `/repo`.
 
-## 5. Verify the server is running
+## Verify the server is running
 
 Open:
 
@@ -58,6 +58,8 @@ Confirm that the server responds with:
 ```
 {"status":"ok"}
 ```
+
+The `/health` endpoint is exempt from authentication so monitoring tools (and you) can check whether the server is alive without needing an API key.
 
 ## 6. Submit your task
 
