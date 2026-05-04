@@ -1,5 +1,5 @@
 # TODO: Choose a base image
-# Hint: use python:3.12-slim for a lightweight Python image
+# Hint: use python:3.11-slim for a lightweight Python image
 FROM ???
 
 # TODO: Install system dependencies
