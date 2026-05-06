@@ -17,8 +17,13 @@ def _load_allowed_keys() -> set[str]:
 ALLOWED_API_KEYS = _load_allowed_keys()
 
 
+EXEMPT_PATHS = {"/health"}
+
+
 class ApiKeyMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
+        if request.url.path in EXEMPT_PATHS:
+            return await call_next(request)
         auth = request.headers.get("Authorization", "")
         if not auth.startswith("Bearer ") or auth[7:] not in ALLOWED_API_KEYS:
             return JSONResponse({"error": "Unauthorized"}, status_code=401)
